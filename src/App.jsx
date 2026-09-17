@@ -267,13 +267,13 @@ export default function App() {
   const currentAnswers = answers[currentVideo?.id] || {};
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-12 pt-6 px-2 sm:px-4">
-      {/* デスクトップ時の最大幅を max-w-2xl から max-w-xl に縮小し、余白を調整 */}
-      <div className={`max-w-xl mx-auto bg-white rounded-xl shadow-sm p-4 sm:p-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+    <div className="min-h-screen bg-gray-100 pb-12 pt-6 px-4">
+      {/* コンテナの幅を確実に max-w-2xl に制限し、中央寄せ */}
+      <div className={`max-w-2xl mx-auto bg-white rounded-xl shadow-sm p-4 sm:p-8 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
         
         {/* プログレスバー */}
-        <div className="mb-4 sm:mb-6">
-          <div className="flex justify-between text-xs sm:text-sm text-gray-500 mb-2">
+        <div className="mb-6">
+          <div className="flex justify-between text-sm text-gray-500 mb-2">
             <span>Progress</span>
             <span>{currentVideoIndex + 1} / {surveyVideos.length}</span>
           </div>
@@ -285,8 +285,8 @@ export default function App() {
           </div>
         </div>
 
-        {/* 3Dメッシュ動画エリア：高さを制限し、object-containで全画面化を防ぐ */}
-        <div className="w-full bg-gray-100 rounded-lg overflow-hidden mb-6 sm:mb-8 aspect-video relative flex items-center justify-center max-h-[250px] sm:max-h-[350px]">
+        {/* 3Dメッシュ動画エリア：aspect-videoを削除し、高さを明示的に固定して全身を収める */}
+        <div className="w-full bg-gray-100 rounded-lg mb-8 flex items-center justify-center h-[350px] sm:h-[450px] overflow-hidden">
           <video 
             key={currentVideo?.id}
             ref={videoRef}
@@ -299,15 +299,15 @@ export default function App() {
           />
         </div>
 
-        {/* 評価ボタンエリア：スマホでのタップ視認性を強化 */}
+        {/* 評価ボタンエリア */}
         <div className="space-y-6 sm:space-y-8">
           {QUESTIONS.map((q) => (
-            <div key={q.id} className="flex flex-col space-y-2 sm:space-y-3">
-              <div className="flex justify-between text-xs sm:text-sm text-gray-700 font-bold px-1">
+            <div key={q.id} className="flex flex-col space-y-3">
+              <div className="flex justify-between text-sm text-gray-700 font-bold px-1">
                 <span>(1) {q.left}</span>
                 <span>{q.right} (5)</span>
               </div>
-              <div className="flex justify-between gap-1 sm:gap-3">
+              <div className="flex justify-between gap-2 sm:gap-4">
                 {[1, 2, 3, 4, 5].map(score => {
                   const isSelected = currentAnswers[q.id] === score;
                   return (
