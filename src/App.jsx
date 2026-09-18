@@ -292,7 +292,9 @@ export default function App() {
             loop 
             muted 
             playsInline
-            className="w-full h-full object-contain"
+            // スマホ表示時 (デフォルト): scale-[1.5] (1.5倍)
+            // PC表示時 (sm:): scale-[1.25] (1.25倍)
+            className="w-full h-full object-contain scale-[1.5] sm:scale-[1.5] transition-transform duration-300"
           />
         </div>
 
