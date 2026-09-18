@@ -215,7 +215,7 @@ export default function App() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">最も好きな（または得意な）ジャンル</label>
-              <div className="text-2xs text-gray-500 mb-2">※無い場合は「なし」を記入してください</div>
+              <p className="text-2xs text-gray-500 mb-2">※無い場合は「なし」を記入してください</p>
               <input 
                 type="text" 
                 placeholder="例: HIPHOP, K-POP, Jazzなど"
