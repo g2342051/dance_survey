@@ -143,7 +143,6 @@ export default function App() {
     
     // 簡易的な一意のIDを生成
     const userId = 'user_' + Math.random().toString(36).substr(2, 9);
-    
     const payload = { userId, userInfo, answers };
 
     try {
@@ -286,7 +285,7 @@ export default function App() {
         </div>
 
         {/* 3Dメッシュ動画エリア：aspect-videoを削除し、高さを明示的に固定して全身を収める */}
-        <div className="w-full bg-gray-100 rounded-lg mb-8 flex items-center justify-center h-[350px] sm:h-[450px] overflow-hidden">
+        <div className="w-full bg-gray-100 rounded-lg mb-8 flex items-center justify-center h-[350px] sm:h-[450px] overflow-hidden relative z-0">
           <video 
             key={currentVideo?.id}
             ref={videoRef}
@@ -315,11 +314,12 @@ export default function App() {
                       key={score}
                       type="button"
                       onClick={() => handleScoreSelect(q.id, score)}
-                      className={`flex-1 py-3 text-base sm:text-lg font-bold rounded-lg border-2 transition-all duration-150 ${
-                        isSelected 
-                          ? 'bg-black border-black text-white shadow-md' 
-                          : 'bg-white border-gray-300 text-gray-700 active:bg-gray-200'
-                      }`}
+                      // transform と scale を追加してタップ時の「押し込み感」を強調
+                      className={`flex-1 py-3 text-base sm:text-lg font-bold rounded-lg border-2 transition-all duration-150 touch-manipulation select-none transform
+                        ${isSelected 
+                          ? 'bg-gray-900 border-gray-900 text-white shadow-inner scale-95 ring-2 ring-offset-1 ring-gray-900' 
+                          : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50 active:bg-gray-200 active:scale-95'
+                        }`}
                     >
                       {score}
                     </button>
