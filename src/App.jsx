@@ -95,7 +95,7 @@ export default function App() {
     // ★ 4つのパターンからランダムに1つを決定する
     //const patterns = ['A', 'B', 'C', 'D'];
     //const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
-    
+
     // 回答が極端に少ない場合のテスト用に、特定のパターンを強制する場合は以下の行をコメントアウト解除してください
     const patterns = ['A'];
     const randomPattern = 'A'; // テスト用にパターンAを強制
@@ -193,7 +193,7 @@ export default function App() {
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
           <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">ダンスモーション評価アンケート</h1>
           <p className="text-sm text-gray-600 mb-6 leading-relaxed">
-            このアンケートでは、生成された3Dキャラクターのダンスの動きを見て、どのような印象を受けるかお答えいただきます。全20本の動画を評価していただきます。
+            このアンケートでは、生成された3Dキャラクターのダンスの動きを見て、どのような印象を受けるかお答えください。全20本の動画を評価していただきます。
           </p>
           
           <div className="space-y-4">
