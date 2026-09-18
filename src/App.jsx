@@ -93,9 +93,11 @@ export default function App() {
     }
 
     // ★ 4つのパターンからランダムに1つを決定する
-    const patterns = ['A', 'B', 'C', 'D'];
+    //const patterns = ['A', 'B', 'C', 'D'];
     //const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    
     // 回答が極端に少ない場合のテスト用に、特定のパターンを強制する場合は以下の行をコメントアウト解除してください
+    const patterns = ['A'];
     const randomPattern = 'A'; // テスト用にパターンAを強制
 
     // 決定したパターンを userInfo に保存しておく（後でGASに送るため）
