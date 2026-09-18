@@ -84,6 +84,7 @@ export default function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRef = useRef(null);
 
+
   // --- 属性入力画面の処理 ---
   const handleStartSurvey = () => {
     if (!userInfo.experience || !userInfo.favoriteGenre) {
@@ -91,19 +92,28 @@ export default function App() {
       return;
     }
 
-    // パターンに応じて20本の動画を抽出
+    // ★ 4つのパターンからランダムに1つを決定する
+    const patterns = ['A', 'B', 'C', 'D'];
+    const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    // 回答が極端に少ない場合のテスト用に、特定のパターンを強制する場合は以下の行をコメントアウト解除してください
+    //const randomPattern = 'C';
+
+    // 決定したパターンを userInfo に保存しておく（後でGASに送るため）
+    const updatedUserInfo = { ...userInfo, pattern: randomPattern };
+    setUserInfo(updatedUserInfo);
+
+    // ランダムに決まったパターンに応じて動画を抽出
     let selectedVideos = [];
-    if (userInfo.pattern === 'A') selectedVideos = ALL_VIDEOS.slice(0, 20);
-    else if (userInfo.pattern === 'B') selectedVideos = ALL_VIDEOS.slice(20, 40);
-    else if (userInfo.pattern === 'C') selectedVideos = [...ALL_VIDEOS.slice(0, 10), ...ALL_VIDEOS.slice(20, 30)];
-    else if (userInfo.pattern === 'D') selectedVideos = [...ALL_VIDEOS.slice(10, 20), ...ALL_VIDEOS.slice(30, 40)];
+    if (randomPattern === 'A') selectedVideos = ALL_VIDEOS.slice(0, 20);
+    else if (randomPattern === 'B') selectedVideos = ALL_VIDEOS.slice(20, 40);
+    else if (randomPattern === 'C') selectedVideos = [...ALL_VIDEOS.slice(0, 10), ...ALL_VIDEOS.slice(20, 30)];
+    else if (randomPattern === 'D') selectedVideos = [...ALL_VIDEOS.slice(10, 20), ...ALL_VIDEOS.slice(30, 40)];
 
-    // 抽出した20本の動画配列をランダムに並び替える
     const shuffledVideos = shuffleArray(selectedVideos);
-
-    setSurveyVideos(shuffledVideos); // 並び替えたものをセット
+    setSurveyVideos(shuffledVideos);
     setStep('survey');
   };
+
 
   // --- アンケート画面の処理 ---
   // 全項目の回答が完了したかチェックし、自動遷移する
@@ -210,20 +220,6 @@ export default function App() {
                 value={userInfo.favoriteGenre}
                 onChange={e => setUserInfo({...userInfo, favoriteGenre: e.target.value})}
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">アンケートパターン（指示されたものを選んでください）</label>
-              <select 
-                className="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500"
-                value={userInfo.pattern}
-                onChange={e => setUserInfo({...userInfo, pattern: e.target.value})}
-              >
-                <option value="A">パターンA</option>
-                <option value="B">パターンB</option>
-                <option value="C">パターンC</option>
-                <option value="D">パターンD</option>
-              </select>
             </div>
 
             <button 
