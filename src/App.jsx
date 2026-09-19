@@ -93,12 +93,12 @@ export default function App() {
     }
 
     // ★ 4つのパターンからランダムに1つを決定する
-    //const patterns = ['A', 'B', 'C', 'D'];
-    //const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
+    const patterns = ['A', 'B', 'C', 'D'];
+    const randomPattern = patterns[Math.floor(Math.random() * patterns.length)];
 
     // 回答が極端に少ない場合のテスト用に、特定のパターンを強制する場合は以下の行をコメントアウト解除してください
-    const patterns = ['A'];
-    const randomPattern = 'A'; // テスト用にパターンAを強制
+    //const patterns = ['A'];
+    //const randomPattern = 'A'; // テスト用にパターンAを強制
 
     // 決定したパターンを userInfo に保存しておく（後でGASに送るため）
     const updatedUserInfo = { ...userInfo, pattern: randomPattern };
@@ -196,11 +196,11 @@ export default function App() {
             このアンケートでは、生成された3Dキャラクターのダンスの動きを見て、どのような印象を受けるかお答えください。全20本の動画を評価していただきます。
           </p>
           
-          <div className="space-y-4">
+          <div className="space-y-[2rem]">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">ダンス経験年数</label>
               <select 
-                className="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 rounded-md shadow-sm py-3 px-3 h-12 border focus:ring-blue-500 focus:border-blue-500"
                 value={userInfo.experience}
                 onChange={e => setUserInfo({...userInfo, experience: e.target.value})}
               >
@@ -215,11 +215,11 @@ export default function App() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">最も好きな（または得意な）ジャンル</label>
-              <p className="text-2xs text-gray-500 mb-2">※無い場合は「なし」を記入してください</p>
+              <span className="text-[13px] text-[#6b7280] mb-2 block">※無い場合は「なし」を記入してください</span>
               <input 
                 type="text" 
                 placeholder="例: HIPHOP, K-POP, Jazzなど"
-                className="w-full border-gray-300 rounded-md shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500"
+                className="w-full border-gray-300 rounded-md shadow-sm py-3 px-3 h-12 border focus:ring-blue-500 focus:border-blue-500"
                 value={userInfo.favoriteGenre}
                 onChange={e => setUserInfo({...userInfo, favoriteGenre: e.target.value})}
               />
